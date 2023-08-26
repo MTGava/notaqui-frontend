@@ -39,6 +39,8 @@ imageUploadForm.addEventListener('submit', async (e) => {
                 throw new Error('Erro ao chamar a API');
             }
 
+            showToast('Sucesso ao chamar a API!', 'toast-success');
+
             const data = await response.json();
 
 
@@ -57,6 +59,7 @@ imageUploadForm.addEventListener('submit', async (e) => {
             expenseFormContainer.style.display = 'block';
         } catch (error) {
             console.error('Erro:', error);
+            showToast('Falha ao chamar a API.', 'toast-failure');
         } finally {
             loadingIndicator.classList.remove('active');
         }
@@ -71,6 +74,12 @@ async function loadUserMatriculas() {
         const response = await fetch('https://notaqui-backend-0b13dda23bf4.herokuapp.com/notaqui/api/v1/usuarios/buscar');
         const userData = await response.json();
 
+        if (!response.ok) {
+            throw new Error('Erro ao carregar dados do usuário');
+        }
+
+        showToast('Dados de usuários carregados com sucesso!', 'toast-success');
+
         userData.forEach(user => {
             const option = document.createElement('option');
             option.value = user.matricula;
@@ -78,7 +87,8 @@ async function loadUserMatriculas() {
             userSelect.appendChild(option);
         });
     } catch (error) {
-        console.error('Erro ao carregar matrículas dos usuários:', error);
+        console.error('Erro ao carregar dados dos usuários:', error);
+        showToast('Falha ao carregar dados dos usuários.', 'toast-failure');
     }
 }
 
@@ -107,10 +117,6 @@ expenseForm.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify(requestBody)
         });
-
-        if (!response.ok) {
-            throw new Error('Erro ao cadastrar despesa');
-        }
 
         if (!response.ok) {
             throw new Error('Erro ao cadastrar despesa');
