@@ -58,3 +58,13 @@ input[type="file"] {
 .loading.active {
     display: inline;
 }
+
+.toast-success {
+    background-color: #4caf50;
+    color: white;
+}
+
+.toast-failure {
+    background-color: #f44336;
+    color: white;
+}
