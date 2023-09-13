@@ -106,7 +106,8 @@ expenseForm.addEventListener('submit', async (e) => {
         valor: valorSpan.textContent,
         anexo: null,
         cnpj: cnpjSpan.textContent,
-        chaveAcesso: '0'
+        chaveAcesso: '0',
+        titulo: 'Teste'
     };
 
     try {
